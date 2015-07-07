@@ -1,0 +1,7 @@
+source "http://api.berkshelf.com/"
+cookbook 'git', '~> 4.0.2'
+cookbook 'iptables'
+cookbook 'vim'
+cookbook 'timezone-ii', git: 'https://github.com/L2G/timezone-ii.git'
+cookbook 'mongodb', '~> 0.16.2'
+cookbook 'redis2', '~> 0.5.1'
