@@ -5,8 +5,8 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box = "centos65"
-  config.vm.box_url="https://github.com/2creatives/vagrant-centos/releases/download/v6.5.3/centos65-x86_64-20140116.box"
+  config.vm.box = "centos6.5"
+  config.vm.box_url="http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_centos-6.5_chef-provisionerless.box"
   config.vm.network "private_network", ip: "192.168.33.10"
   config.ssh.private_key_path = "~/.vagrant.d/insecure_private_key"
   config.vm.hostname = "localhost"
@@ -44,6 +44,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       "recipe[vim]",
       "recipe[git]",
       "recipe[yum]",
+      "recipe[yumrepo]",
       "recipe[redis2]",
       "recipe[mongodb]"
     ]
