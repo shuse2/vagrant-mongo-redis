@@ -12,14 +12,19 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.hostname = "localhost"
   config.ssh.port = "2222"
   config.ssh.host = "127.0.0.1"
-  config.vm.network :forwarded_port, guest: 80, host: 8080
   config.vm.synced_folder "./", "/vagrant"
 
-  #mongo
+  # web
+  config.vm.network :forwarded_port, guest: 80, host: 8080
+
+  # mongo
   config.vm.network :forwarded_port, guest: 27017, host: 27017
   config.vm.network :forwarded_port, guest: 27018, host: 27018
   config.vm.network :forwarded_port, guest: 27019, host: 27019
   config.vm.network :forwarded_port, guest: 28017, host: 28017
+
+  # redis
+  config.vm.network :forwarded_port, guest: 6379, host: 6379
 
   #config.vm.provider :virtualbox do |vb|
     #vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
