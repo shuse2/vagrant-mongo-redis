@@ -44,9 +44,23 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       "recipe[vim]",
       "recipe[git]",
       "recipe[yum]",
-      "recipe[yumrepo]",
+      "recipe[yum-epel]",
       "recipe[redis2]",
       "recipe[mongodb]"
     ]
   end
+  config.vm.provision "shell", inline: reinstall_locale
+  config.vm.provision "shell", inline: add_locale
+end
+
+def reinstall_locale
+  <<-'EOS'
+    yum install -y glibc-common
+  EOS
+end
+
+def add_locale
+  <<-'EOS'
+    echo "LC_CTYPE=\"en_US.UTF-8\"" | sudo tee -a /etc/sysconfig/i18n
+  EOS
 end
