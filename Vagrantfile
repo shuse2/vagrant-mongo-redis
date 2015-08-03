@@ -46,6 +46,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       "recipe[yum]",
       "recipe[yum-epel]",
       "recipe[redis2]",
+      "recipe[redis2::auto]",
       "recipe[mongodb]"
     ]
   end
@@ -61,6 +62,8 @@ end
 
 def add_locale
   <<-'EOS'
-    echo "LC_CTYPE=\"en_US.UTF-8\"" | sudo tee -a /etc/sysconfig/i18n
+    if ! grep -q LC_CTYPE "/etc/sysconfig/i18n"; then
+      echo "LC_CTYPE=\"en_US.UTF-8\"" | sudo tee -a /etc/sysconfig/i18n
+    fi
   EOS
 end
